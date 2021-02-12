@@ -1,20 +1,20 @@
-﻿using Buisness.Concrete;
-using DataAccess.Concrete;
+﻿
+using Buisness.Concrete;
 using DataAccess.Concrete.EntityFramewrok;
 using Entities.Concrete;
 using System;
 
-namespace TestUI
+namespace ConsoleUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-             BrandTest();
+            BrandTest();
 
-             ColorTest();
+            ColorTest();
 
-             CarTest();
+            CarTest();
 
             UserTest();
 
@@ -27,10 +27,10 @@ namespace TestUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EFCarDal());
-            var CarAdded = carManager.Add(new Car { BrandId = 1, ColorId = 1, DailyPrice = 150, ModelYear =new DateTime(2018,01,01), Description = "random description 3" });
-          
+            var CarAdded = carManager.Add(new Car { BrandId = 1, ColorId = 1, DailyPrice = 150, ModelYear = new DateTime(2018, 01, 01), Description = "random description 3" });
 
-            Console.WriteLine("Message= " +CarAdded.Message + " Success= " + CarAdded.Success);
+
+            Console.WriteLine("Message= " + CarAdded.Message + " Success= " + CarAdded.Success);
 
             //bütün arabaları getirme
             var AllCar = carManager.GetAll();
@@ -49,23 +49,23 @@ namespace TestUI
                 Console.WriteLine(car.BrandName + "    " + car.ColorName + "   " + car.Description + "   " + car.DailyPrice);
             }
 
-           // var carDeleted = carManager.Delete(new Car {CarId=4});
-           // Console.WriteLine("Message= " + carDeleted.Message + " Success= " + carDeleted.Success);
+            // var carDeleted = carManager.Delete(new Car {CarId=4});
+            // Console.WriteLine("Message= " + carDeleted.Message + " Success= " + carDeleted.Success);
         }
 
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EFColorDal());
-           var colorAdded= colorManager.Add(new Color { ColorName = "Red" });
+            var colorAdded = colorManager.Add(new Color { ColorName = "Red" });
             Console.WriteLine(colorAdded.Message);
 
-         
+
         }
 
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EFBrandDal());
-           var brandAdded= brandManager.Add(new Brand { BrandName = "Volvo" });
+            var brandAdded = brandManager.Add(new Brand { BrandName = "Volvo" });
 
             Console.WriteLine(brandAdded.Message);
         }
@@ -77,10 +77,11 @@ namespace TestUI
             Console.WriteLine(userAdded.Message);
 
         }
-        private static void CustomerTest() {
+        private static void CustomerTest()
+        {
 
             CustomerManager customerManager = new CustomerManager(new EFCustomerDal());
-            var customerAdded = customerManager.Add(new Customer {CompanyName="tekstil",UserId=1 });
+            var customerAdded = customerManager.Add(new Customer { CompanyName = "tekstil", UserId = 1 });
             Console.WriteLine(customerAdded.Message);
         }
 
@@ -88,7 +89,7 @@ namespace TestUI
         {
             RentalManager rentalManager = new RentalManager(new EFRentalDal());
 
-            var rentalAdded = rentalManager.Add(new Rental { CarId = 4, CustomerID = 1, RentDate =DateTime.Now, ReturnDate = null}); ;
+            var rentalAdded = rentalManager.Add(new Rental { CarId = 4, CustomerID = 1, RentDate = DateTime.Now, ReturnDate = null }); ;
             Console.WriteLine(rentalAdded.Message);
             var rentalDetailGet = rentalManager.GetAllCarDetails();
             foreach (var rentalDetail in rentalDetailGet.Data)
@@ -104,6 +105,5 @@ namespace TestUI
 
             }
         }
-
     }
 }

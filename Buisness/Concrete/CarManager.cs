@@ -1,6 +1,8 @@
 ﻿using Buisness.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,47 +11,55 @@ namespace Buisness.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _CarDal;
+        ICarDal _carDal;
 
         public CarManager(ICarDal carDal)
         {
-      
-            _CarDal = carDal;
+
+            _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
+            if (DateTime.Now.Hour == 1)
+            {
+                return new ErrorResult("System is under maintenance.");
+            }
             //şart blokları...
-            _CarDal.Add(car);
-            Console.WriteLine("eklendi");
+            _carDal.Add(car);
+            return new SuccessResult("Car added."); 
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             //şart blokları...
-            _CarDal.Delete(car);
-            Console.WriteLine("Silindi");
+            _carDal.Delete(car);
+            return new SuccessResult("Car deleted.");
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
             //şart blokları...
-            return _CarDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),"All cars listed."); 
         }
 
-        public Car GetById(Car car)
+        public IDataResult<List<CarDetailDto>> GetAllCarDetails()
         {
-            //şart blokları...
-            return _CarDal.GetById(car);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(),"All cars deatils listed");
         }
 
-        public void Update(Car car)
+        public IDataResult<Car> GetById(int id)
+        {
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id),"get car ");
+        }
+
+        public IResult Update(Car car)
         {
             //şart blokları...
 
-            _CarDal.Update(car);
+            _carDal.Update(car);
 
-            Console.WriteLine("Güncellendi");
+            return new SuccessResult("Car updated.");
         }
     }
 }

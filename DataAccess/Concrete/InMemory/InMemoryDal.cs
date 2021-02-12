@@ -1,8 +1,10 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete
@@ -17,9 +19,9 @@ namespace DataAccess.Concrete
         public InMemoryDal()
         {
             _cars = new List<Car>{
-                 new Car {  CarId = 1,BrandId=2, ColorId = 1, DailyPrice = 100, ModelYear = "2018", Descripton = "Chevrolet Lacetti 1.4 " },
-                 new Car {  CarId = 2,BrandId=1, ColorId = 1, DailyPrice = 200, ModelYear = "2019", Descripton = "Chevrolet Lacetti 1.5 " },
-                 new Car {  CarId = 3,BrandId=3, ColorId = 1, DailyPrice = 300, ModelYear = "2020", Descripton = "Chevrolet Lacetti 1.6 " }
+                 new Car {  CarId = 1,BrandId=2, ColorId = 1, DailyPrice = 100, ModelYear = new DateTime(2018), Description = "Chevrolet Lacetti 1.4 " },
+                 new Car {  CarId = 2,BrandId=1, ColorId = 1, DailyPrice = 200, ModelYear = new DateTime(2018), Description = "Chevrolet Lacetti 1.5 " },
+                 new Car {  CarId = 3,BrandId=3, ColorId = 1, DailyPrice = 300, ModelYear = new DateTime(2018), Description = "Chevrolet Lacetti 1.6 " }
 
                 };
         }
@@ -63,9 +65,24 @@ namespace DataAccess.Concrete
 
             UpdateByCar.ModelYear = car.ModelYear;
 
-            UpdateByCar.Descripton = car.Descripton;
+            UpdateByCar.Description = car.Description;
 
 
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetAllCarDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,16 +1,22 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
+using Entities.DTOs;
 using System.Collections.Generic;
 
 namespace Buisness.Abstract
 {
     public  interface ICarService
     {
-        List<Car> GetAll();
+       IDataResult<List<Car>> GetAll();
 
-        void Add(Car car);
-        void Update(Car car);
-        void Delete(Car car);
-        Car GetById(Car car);
+       IDataResult<Car> GetById(int id);
+
+       IDataResult<List<CarDetailDto>> GetAllCarDetails();
+
+        IResult Add(Car car);
+        IResult Update(Car car);
+        IResult Delete(Car car);
+
 
     }
 }

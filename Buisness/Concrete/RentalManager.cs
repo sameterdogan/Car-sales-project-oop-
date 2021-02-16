@@ -24,7 +24,7 @@ namespace Buisness.Concrete
 
             if (result != null)
             {
-                return new ErrorResult("rental error");
+                return new ErrorResult("Araba şu an kirada");
                     
             }
             _rentalDal.Add(rental);

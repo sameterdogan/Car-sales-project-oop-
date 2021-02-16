@@ -53,6 +53,11 @@ namespace Buisness.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id),"get car ");
         }
 
+        public IDataResult<CarDetailDto> GetByIdCarDetails(int id )
+        {
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetByIdCarDetails(id), "Get Car details ");
+        }
+
         public IResult Update(Car car)
         {
             //şart blokları...

@@ -84,5 +84,10 @@ namespace DataAccess.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public CarDetailDto GetByIdCarDetails(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
